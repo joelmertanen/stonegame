@@ -1,7 +1,7 @@
 <div class="kk-game-field">
     <div class="kk-row" ng-repeat="cellRowIndex in getSizeArray()">
-        <div ng-repeat="cellColumnIndex in getSizeArray()">
-            <kk-cell row="{{cellRowIndex}}" column="{{cellColumnIndex}}"></kk-cell>
+        <div class="kk-row-item" ng-repeat="cellColumnIndex in getSizeArray()">
+            <kk-cell on-movable-click="onMovableClick(row, column)" is-movable="isMovableCell(cellRowIndex, cellColumnIndex)" is-reserved="isReservedCell(cellRowIndex, cellColumnIndex)" row="{{cellRowIndex}}" column="{{cellColumnIndex}}"></kk-cell>
         </div>
     </div>
 </div>

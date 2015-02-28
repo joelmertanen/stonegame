@@ -9,11 +9,28 @@
 angular.module('kivipeli')
   .directive('kkCell', function () {
     return {
-      template: '<div class="kk-cell">at {{row}}, {{column}}</div>',
+      templateUrl: '/views/kk-cell.html',
       restrict: 'E',
       scope: {
         'row': '@',
-        'column': '@'
+        'column': '@',
+        'isMovable': '=',
+        'isReserved': '=',
+        'onMovableClick': '&'
+      }, link: function($scope) {
+
+        $scope.cellClicked = cellClicked;
+
+        function cellClicked() {
+            if (!$scope.isMovable) {
+                return;
+            }
+
+            $scope.onMovableClick({
+                row: $scope.row,
+                column: $scope.column
+            });
+        }
       }
     };
   });

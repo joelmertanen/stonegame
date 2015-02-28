@@ -1,10 +1,11 @@
 .kk-game-field {
     .kk-row {
+        height: 80px;
         display: flex;
         justify-content: space-around;
 
-        .kk-cell {
-            flex: 0 1 auto;
+        .kk-row-item {
+            flex: 1 1 auto;
         }
 
     }
