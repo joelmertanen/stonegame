@@ -3,7 +3,7 @@
 describe('Directive: kkGame', function () {
 
   // load the directive's module
-  beforeEach(module('devApp'));
+  beforeEach(module('kivipeli'));
 
   var element,
     scope;
@@ -15,6 +15,5 @@ describe('Directive: kkGame', function () {
   it('should make hidden element visible', inject(function ($compile) {
     element = angular.element('<kk-game></kk-game>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the kkGame directive');
   }));
 });

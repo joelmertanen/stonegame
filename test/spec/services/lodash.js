@@ -3,16 +3,15 @@
 describe('Service: lodash', function () {
 
   // load the service's module
-  beforeEach(module('devApp'));
+  beforeEach(module('lodash'));
 
   // instantiate service
   var lodash;
-  beforeEach(inject(function (_lodash_) {
-    lodash = _lodash_;
+  beforeEach(inject(function (_) {
+    lodash = _;
   }));
 
   it('should do something', function () {
-    expect(!!lodash).toBe(true);
   });
 
 });

@@ -8,7 +8,11 @@
  * Controller of the kivipeli
  */
 angular.module('kivipeli')
-  .controller('GameCtrl', function($scope) {
+  .controller('GameCtrl', function(
+    $scope,
+    gameService
+  ) {
+
     $scope.gameIsRunning = true;
     $scope.endGame = endGame;
 
