@@ -44,7 +44,7 @@ angular.module('kivipeli')
 
     function moveButtonTo(row, column) {
         if (row < 0 || column < 0) {
-            return;
+            return false;
         }
 
         var parsedRow       = window.parseInt(row);
@@ -53,13 +53,13 @@ angular.module('kivipeli')
         // if game has ended
         var isGameEnded = currentLocation.row === 0 && currentLocation.column === 0;
         if (isGameEnded) {
-            return;
+            return false;
         }
 
         // only one move to left or up, checks also direction
         var sum = (currentLocation.row - parsedRow) + (currentLocation.column - parsedColumn);
         if (sum !== 1) {
-            return;
+            return false;
         }
 
         angular.extend(currentLocation, {
@@ -68,5 +68,7 @@ angular.module('kivipeli')
         });
 
         updateGameStatus();
+
+        return true;
     }
   });

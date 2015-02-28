@@ -1,5 +1,10 @@
 <div class="kk-container">
 	<h1 ng-show="gameService.gameIsRunning">The game is on!</h1>
     <h1 ng-hide="gameService.gameIsRunning">The game has ended!</h1>
-	<kk-game field-size="gameService.fieldSize" current-location="gameService.currentLocation" move-button-to="gameService.moveButtonTo(row, column)"></kk-game>
+	<kk-game
+        field-size="gameService.fieldSize"
+        current-location="gameService.currentLocation"
+        move-button-to="turnMediatorService.humanMoveButtonTo(row, column)"
+        is-human-turn="turnMediatorService.isHumanTurn"
+    ></kk-game>
 </div>

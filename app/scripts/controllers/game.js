@@ -10,10 +10,12 @@
 angular.module('kivipeli')
   .controller('GameCtrl', function(
     $scope,
-    gameService
+    gameService,
+    turnMediatorService
   ) {
 
     gameService.newGame();
-    $scope.gameService = gameService;
+    $scope.gameService          = gameService;
+    $scope.turnMediatorService  = turnMediatorService;
 
   });

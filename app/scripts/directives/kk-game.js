@@ -17,7 +17,8 @@ angular.module('kivipeli')
       scope: {
         ctrlMoveButtonTo: '&moveButtonTo',
         currentLocation: '=',
-        fieldSize: '='
+        fieldSize: '=',
+        isHumanTurn: '='
       },
       link: function postLink($scope, element) {
         element.find('.kk-game-field').focus();
@@ -36,6 +37,9 @@ angular.module('kivipeli')
         }
 
         function isMovableCell(row, column) {
+            if (!$scope.isHumanTurn) {
+                return;
+            }
             var isToLeft    =   row === $scope.currentLocation.row && column === $scope.currentLocation.column - 1;
             var isToUp      =   row === $scope.currentLocation.row - 1 && column === $scope.currentLocation.column;
             return isToUp || isToLeft;

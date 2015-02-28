@@ -1,4 +1,6 @@
 .kk-game-field {
+    position: relative;
+
     .kk-row {
         height: 80px;
         display: flex;
@@ -7,6 +9,32 @@
         .kk-row-item {
             flex: 1 1 auto;
         }
+    }
 
+    .kk-game-not-active {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        background-color: rgba(191, 191, 191, 0.86);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.ng-enter,
+        &.ng-leave {
+            transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.4s;
+        }
+
+        &.ng-enter,
+        &.ng-leave.ng-leave-active {
+            opacity: 0;
+        }
+
+        &.ng-enter.ng-enter-active,
+        &.ng-leave {
+            opacity: 1;
+        }
     }
 }
