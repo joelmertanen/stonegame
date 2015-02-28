@@ -49,7 +49,7 @@ describe('Service: gameService', function () {
       expect(newLocation.column).toBe(newColumn);
     });
 
-    it('should validate input and not change location', function() {
+    it('should validate input and not change location on row and col change', function() {
       var oldLocation = gameService.currentLocation;
       var oldRow    = oldLocation.row;
       var oldColumn = oldLocation.column;
@@ -62,6 +62,32 @@ describe('Service: gameService', function () {
       expect(newLocation.row).toBe(oldRow);
       expect(newLocation.column).toBe(oldColumn);
     });
+
+    it('should validate input and not change location to under zero', function() {
+      function moveToLeftmostCell() {
+        var loc = gameService.currentLocation;
+        if (loc.column === 0) {
+          return;
+        }
+        gameService.moveButtonTo(loc.row, loc.column - 1);
+        moveToLeftmostCell();
+      }
+
+      moveToLeftmostCell();
+
+      var oldLocation = gameService.currentLocation;
+      var oldRow      = oldLocation.row;
+      var oldColumn   = oldLocation.column;
+
+      var newRow      = oldRow;
+      var newColumn   = -1;
+      gameService.moveButtonTo(newRow, newColumn);
+      var newLocation = gameService.currentLocation;
+
+      expect(newLocation.row).toBe(oldRow);
+      expect(newLocation.column).toBe(oldColumn);
+    });
+
   });
 
 });

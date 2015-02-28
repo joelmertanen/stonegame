@@ -21,6 +21,8 @@ angular.module('kivipeli')
         moveButtonTo: moveButtonTo
     };
 
+    newGame();
+
     return service;
 
     function updateGameStatus() {
@@ -41,6 +43,10 @@ angular.module('kivipeli')
     }
 
     function moveButtonTo(row, column) {
+        if (row < 0 || column < 0) {
+            return;
+        }
+
         var parsedRow       = window.parseInt(row);
         var parsedColumn    = window.parseInt(column);
         // validate first:
@@ -50,7 +56,7 @@ angular.module('kivipeli')
             return;
         }
 
-        // only one move to left or up
+        // only one move to left or up, checks also direction
         var sum = (currentLocation.row - parsedRow) + (currentLocation.column - parsedColumn);
         if (sum !== 1) {
             return;

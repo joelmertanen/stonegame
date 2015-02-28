@@ -51,25 +51,21 @@ angular.module('kivipeli')
             var keyLeft =   keyEvent.keyCode === 37;
 
             if (keyUp) {
-                if ($scope.currentLocation.row === 0) {
-                    return;
-                }
-
                 $scope.moveButtonTo(
                     $scope.currentLocation.row - 1,
                     $scope.currentLocation.column
                 );
+
+                keyEvent.preventDefault();
             }
 
             if (keyLeft) {
-                if ($scope.currentLocation.column === 0) {
-                    return;
-                }
-
                 $scope.moveButtonTo(
                     $scope.currentLocation.row,
                     $scope.currentLocation.column - 1
                 );
+
+                keyEvent.preventDefault();
             }
         }
 
