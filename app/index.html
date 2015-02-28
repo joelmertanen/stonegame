@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="devApp">
+  <body ng-app="kivipeli">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -80,6 +80,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -89,6 +90,8 @@
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/game.js"></script>
         <script src="scripts/directives/kk-game.js"></script>
+        <script src="scripts/directives/kk-cell.js"></script>
+        <script src="scripts/services/lodash.js"></script>
         <!-- endbuild -->
 </body>
 </html>

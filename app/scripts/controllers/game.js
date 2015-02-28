@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc function
- * @name devApp.controller:GameCtrl
+ * @name kivipeli.controller:GameCtrl
  * @description
  * # GameCtrl
- * Controller of the devApp
+ * Controller of the kivipeli
  */
-angular.module('devApp')
+angular.module('kivipeli')
   .controller('GameCtrl', function () {
   });

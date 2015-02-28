@@ -2,17 +2,22 @@
 
 /**
  * @ngdoc directive
- * @name devApp.directive:kkGame
+ * @name kivipeli.directive:kkGame
  * @description
  * # kkGame
  */
-angular.module('devApp')
-  .directive('kkGame', function () {
+angular.module('kivipeli')
+  .directive('kkGame', function (_) {
     return {
       templateUrl: '/views/kk-game.html',
       restrict: 'E',
       link: function postLink($scope) {
-      	$scope.fieldSize = 8;
+        $scope.fieldSize = 8;
+        $scope.getSizeArray = getSizeArray;
+
+        function getSizeArray() {
+            return _.range($scope.fieldSize);
+        }
       }
     };
   });

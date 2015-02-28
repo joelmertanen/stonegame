@@ -1,0 +1,11 @@
+.kk-game-field {
+    .kk-row {
+        display: flex;
+        justify-content: space-around;
+
+        .kk-cell {
+            flex: 0 1 auto;
+        }
+
+    }
+}

@@ -2,20 +2,21 @@
 
 /**
  * @ngdoc overview
- * @name devApp
+ * @name kivipeli
  * @description
- * # devApp
+ * # kivipeli
  *
  * Main module of the application.
  */
 angular
-  .module('devApp', [
+  .module('kivipeli', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'lodash'
   ])
   .config(function ($routeProvider) {
     $routeProvider
