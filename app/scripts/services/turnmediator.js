@@ -43,5 +43,4 @@ angular.module('kivipeli')
         }
     }
 
-
   });
