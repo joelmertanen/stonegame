@@ -13,10 +13,7 @@ angular.module('kivipeli')
     gameService
   ) {
 
-    $scope.gameIsRunning = true;
-
-    $scope.currentLocation  = gameService.currentLocation;
-    $scope.moveButtonTo     = gameService.moveButtonTo;
-    $scope.fieldSize        = gameService.fieldSize;
+    gameService.newGame();
+    $scope.gameService = gameService;
 
   });

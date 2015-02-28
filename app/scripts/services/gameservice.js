@@ -10,16 +10,35 @@
 angular.module('kivipeli')
   .factory('gameService', function() {
     var fieldSize = 8;
-    var currentLocation = {
-        row:    fieldSize - 1,
-        column: fieldSize - 1
-    };
+    var gameIsRunning = true;
+
+    var currentLocation = {};
     var service = {
         currentLocation: currentLocation,
         fieldSize: fieldSize,
+        gameIsRunning: gameIsRunning,
+        newGame: newGame,
         moveButtonTo: moveButtonTo
     };
+
     return service;
+
+    function updateGameStatus() {
+        if (currentLocation.row === 0 && currentLocation.column === 0) {
+            // don't break the reference... this is annoying.
+            service.gameIsRunning = false;
+        }
+    }
+
+    function newGame() {
+        // indeces are zero-based
+        // extend to keep references alive
+        angular.extend(currentLocation, {
+            row:    fieldSize - 1,
+            column: fieldSize - 1
+        });
+        gameIsRunning = true;
+    }
 
     function moveButtonTo(row, column) {
         var parsedRow       = window.parseInt(row);
@@ -41,5 +60,7 @@ angular.module('kivipeli')
             row: parsedRow,
             column: parsedColumn
         });
+
+        updateGameStatus();
     }
   });
