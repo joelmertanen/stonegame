@@ -8,13 +8,26 @@
  * Factory in the devApp.
  */
 angular.module('kivipeli')
-  .factory('aiPlayer', function() {
+  .factory('aiPlayer', function(
+    $q,
+    $timeout
+  ) {
 
     var service = {
-      makeMove: makeMove
+      makeMove: wrapMakeMove
     };
 
     return service;
+
+    function wrapMakeMove(currentLocation) {
+      var def = $q.defer();
+
+      // artificial slowness to simulate some actual AI ;)
+      $timeout(function() {
+        def.resolve(makeMove(currentLocation));
+      }, 500);
+      return def.promise;
+    }
 
     function makeMove(currentLocation) {
       if (currentLocation.row === 0) {

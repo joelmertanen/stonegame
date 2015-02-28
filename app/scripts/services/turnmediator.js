@@ -9,7 +9,6 @@
  */
 angular.module('kivipeli')
   .factory('turnMediatorService', function(
-    $timeout,
     aiPlayer,
     gameService
   ) {
@@ -28,19 +27,17 @@ angular.module('kivipeli')
 
         if (gameService.moveButtonTo(row, column)) {
             service.isHumanTurn = false;
-            $timeout(
-                aiMoveButton,
-                500
-            );
+            aiMoveButton();
         }
     }
 
     function aiMoveButton() {
-        var aiPlayerMove = aiPlayer.makeMove(gameService.currentLocation);
-
-        if (gameService.moveButtonTo(aiPlayerMove.row, aiPlayerMove.column)) {
-            service.isHumanTurn = true;
-        }
+        var s = aiPlayer.makeMove(gameService.currentLocation)
+        s.then(function(aiPlayerMove) {
+            if (gameService.moveButtonTo(aiPlayerMove.row, aiPlayerMove.column)) {
+                service.isHumanTurn = true;
+            }
+        });
     }
 
   });

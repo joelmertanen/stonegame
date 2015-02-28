@@ -7,15 +7,15 @@ describe('Service: turnMediatorService', function () {
   beforeEach(module('kivipeli'));
 
   beforeEach(function () {
-      mockDependency = {
-          moveButtonTo: function () {
-              return true;
-          }
-      };
+    mockDependency = {
+        moveButtonTo: function () {
+            return true;
+        }
+    };
 
-      module(function ($provide) {
-          $provide.value('gameService', mockDependency);
-      });
+    module(function ($provide) {
+        $provide.value('gameService', mockDependency);
+    });
   });
 
   // instantiate service
