@@ -16,7 +16,7 @@ angular.module('kivipeli')
         'column': '@',
         'isMovable': '=',
         'isReserved': '=',
-        'onMovableClick': '&'
+        'moveButtonTo': '&'
       }, link: function($scope) {
 
         $scope.cellClicked = cellClicked;
@@ -26,7 +26,7 @@ angular.module('kivipeli')
                 return;
             }
 
-            $scope.onMovableClick({
+            $scope.moveButtonTo({
                 row: $scope.row,
                 column: $scope.column
             });

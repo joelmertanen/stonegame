@@ -1,4 +1,5 @@
 <div class="kk-container">
-	<h1>The game</h1>
-	<kk-game></kk-game>
+	<h1 ng-show="gameIsRunning">The game is on!</h1>
+    <h1 ng-hide="gameIsRunning">The game has ended!</h1>
+	<kk-game end-game="endGame()"></kk-game>
 </div>
