@@ -7,20 +7,19 @@
  * # kkGame
  */
 angular.module('kivipeli')
-  .directive('kkGame', function (_) {
+  .directive('kkGame', function (
+    _
+  ) {
+
     return {
       templateUrl: '/views/kk-game.html',
       restrict: 'E',
       scope: {
-        endGame: '&'
+        ctrlMoveButtonTo: '&moveButtonTo',
+        currentLocation: '=',
+        fieldSize: '='
       },
       link: function postLink($scope, element) {
-        $scope.fieldSize = 8;
-        $scope.currentLocation = {
-            row: $scope.fieldSize - 1,
-            column: $scope.fieldSize - 1
-        };
-
         element.find('.kk-game-field').focus();
 
         $scope.getSizeArray = getSizeArray;
@@ -29,20 +28,17 @@ angular.module('kivipeli')
         $scope.keypressEvent = keypressEvent;
         $scope.moveButtonTo = moveButtonTo;
 
-        $scope.$watch('currentLocation', function(newLocation) {
-            if (newLocation.row === 0 && newLocation.column === 0) {
-                $scope.endGame();
-            }
-        }, true);
-
         function getSizeArray() {
+            if (!$scope.currentLocation) {
+                return [];
+            }
             return _.range($scope.fieldSize);
         }
 
         function isMovableCell(row, column) {
-            var isToLeft =  row === $scope.currentLocation.row && column === $scope.currentLocation.column - 1;
-            var isToTop =   row === $scope.currentLocation.row - 1 && column === $scope.currentLocation.column;
-            return isToTop || isToLeft;
+            var isToLeft    =   row === $scope.currentLocation.row && column === $scope.currentLocation.column - 1;
+            var isToUp      =   row === $scope.currentLocation.row - 1 && column === $scope.currentLocation.column;
+            return isToUp || isToLeft;
         }
 
         function isReservedCell(row, column) {
@@ -51,7 +47,7 @@ angular.module('kivipeli')
         }
 
         function keypressEvent(keyEvent) {
-            var keyUp =     keyEvent.keyCode === 38;
+            var keyUp   =   keyEvent.keyCode === 38;
             var keyLeft =   keyEvent.keyCode === 37;
 
             if (keyUp) {
@@ -78,9 +74,9 @@ angular.module('kivipeli')
         }
 
         function moveButtonTo(row, column) {
-            _.extend($scope.currentLocation, {
-                row: window.parseInt(row),
-                column: window.parseInt(column)
+            $scope.ctrlMoveButtonTo({
+                row:    row,
+                column: column
             });
         }
       }

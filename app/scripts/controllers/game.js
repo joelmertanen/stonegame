@@ -14,9 +14,9 @@ angular.module('kivipeli')
   ) {
 
     $scope.gameIsRunning = true;
-    $scope.endGame = endGame;
 
-    function endGame() {
-        $scope.gameIsRunning = false;
-    }
+    $scope.currentLocation  = gameService.currentLocation;
+    $scope.moveButtonTo     = gameService.moveButtonTo;
+    $scope.fieldSize        = gameService.fieldSize;
+
   });

@@ -9,21 +9,17 @@
  */
 angular.module('kivipeli')
   .factory('gameService', function() {
-    var gameFieldSize = 8;
+    var fieldSize = 8;
     var currentLocation = {
-        row:    gameFieldSize - 1,
-        column: gameFieldSize - 1
+        row:    fieldSize - 1,
+        column: fieldSize - 1
     };
     var service = {
-        getCurrentLocation: getCurrentLocation,
+        currentLocation: currentLocation,
+        fieldSize: fieldSize,
         moveButtonTo: moveButtonTo
     };
     return service;
-
-
-    function getCurrentLocation() {
-        return angular.copy(currentLocation);
-    }
 
     function moveButtonTo(row, column) {
         var parsedRow       = window.parseInt(row);
