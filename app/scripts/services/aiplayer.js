@@ -24,15 +24,15 @@ angular.module('kivipeli')
 
     function isWinningCell(row, column) {
       // the way to find a winning cell is just a generalized backwards induction
-      if (row === 1 && column % 2 === 1) {
+      if (row === 0 && column % 2 === 0) {
         return true;
       }
 
-      if (column === 1 && row % 2 === 1) {
+      if (column === 0 && row % 2 === 0) {
         return true;
       }
 
-      if (column % 2 === 0 || row % 2 === 0) {
+      if (column > 0 && row > 0 && (column % 2 === 1 || row % 2 === 1)) {
         return true;
       }
 
