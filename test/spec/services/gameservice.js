@@ -80,11 +80,6 @@ describe('Service: gameService', function () {
 
       moveToLeftmostCell();
 
-      var nextLocation = {
-        row:    oldRow - 1,
-        column: - 1
-      };
-
       var wasMoveAllowed  = gameService.moveButtonDiagonal('human');
       var newLocation     = gameService.currentLocation;
 
