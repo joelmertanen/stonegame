@@ -9,7 +9,7 @@
 angular.module('kivipeli')
   .directive('kkCell', function () {
     return {
-      templateUrl: '/views/kk-cell.html',
+      templateUrl: 'views/kk-cell.html',
       restrict: 'E',
       scope: {
         'row': '@',

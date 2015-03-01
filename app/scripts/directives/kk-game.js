@@ -12,7 +12,7 @@ angular.module('kivipeli')
   ) {
 
     return {
-      templateUrl: '/views/kk-game.html',
+      templateUrl: 'views/kk-game.html',
       restrict: 'E',
       scope: {
         ctrlMoveButtonLeft: '&moveButtonLeft',
