@@ -11,11 +11,7 @@
 angular
   .module('kivipeli', [
     'ngAnimate',
-    'ngCookies',
-    'ngResource',
     'ngRoute',
-    'ngSanitize',
-    'ngTouch',
     'lodash'
   ])
   .config(function ($routeProvider) {

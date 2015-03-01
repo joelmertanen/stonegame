@@ -64,19 +64,19 @@ angular.module('kivipeli')
       // there can be always only one, so check them in order
 
       // left
-      if (isWinningCell(currentLocation.row, currentLocation.column - 1)) {
+      if (!isWinningCell(currentLocation.row, currentLocation.column - 1)) {
         service.aiIsWinning = true;
         return 'left';
       }
 
       // diagonal
-      if (isWinningCell(currentLocation.row - 1, currentLocation.column - 1)) {
+      if (!isWinningCell(currentLocation.row - 1, currentLocation.column - 1)) {
         service.aiIsWinning = true;
         return 'diagonal';
       }
 
       // up
-      if (isWinningCell(currentLocation.row - 1, currentLocation.column)) {
+      if (!isWinningCell(currentLocation.row - 1, currentLocation.column)) {
         service.aiIsWinning = true;
         return 'up';
       }
