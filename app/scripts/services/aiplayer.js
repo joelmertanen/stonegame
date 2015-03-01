@@ -13,7 +13,10 @@ angular.module('kivipeli')
     $timeout
   ) {
 
+    var aiIsWinning = false;
+
     var service = {
+      aiIsWinning: aiIsWinning,
       makeMove: wrapMakeMove
     };
 
@@ -62,16 +65,19 @@ angular.module('kivipeli')
 
       // left
       if (isWinningCell(currentLocation.row, currentLocation.column - 1)) {
+        service.aiIsWinning = true;
         return 'left';
       }
 
       // diagonal
       if (isWinningCell(currentLocation.row - 1, currentLocation.column - 1)) {
+        service.aiIsWinning = true;
         return 'diagonal';
       }
 
       // up
       if (isWinningCell(currentLocation.row - 1, currentLocation.column)) {
+        service.aiIsWinning = true;
         return 'up';
       }
 

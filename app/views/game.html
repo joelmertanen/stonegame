@@ -9,4 +9,5 @@
         move-button-diagonal="turnMediatorService.moveButtonDiagonal('human')"
         is-human-turn="turnMediatorService.isHumanTurn"
     ></kk-game>
+    <span ng-show="!gameService.gameResult && aiPlayer.aiIsWinning">You shouldn't play suboptimal games...</span>
 </div>

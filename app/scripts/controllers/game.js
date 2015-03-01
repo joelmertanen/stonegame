@@ -10,6 +10,7 @@
 angular.module('kivipeli')
   .controller('GameCtrl', function(
     $scope,
+    aiPlayer,
     gameService,
     turnMediatorService
   ) {
@@ -17,5 +18,6 @@ angular.module('kivipeli')
     gameService.newGame();
     $scope.gameService          = gameService;
     $scope.turnMediatorService  = turnMediatorService;
+    $scope.aiPlayer             = aiPlayer;
 
   });
