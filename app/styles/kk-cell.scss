@@ -1,18 +1,28 @@
-.kk-cell {
-    border: 1px solid black;
-    margin: 5px;
-    text-align: center;
+.kk-cell-container {
+    display: flex;
+    flex: 1 1 auto;
+    height: 60px; // not happy about this :(
 
-    &.kk-is-movable {
-        background: #008000;
+    .kk-cell {
+        display: flex;
+        flex: 1 1 auto;
+        justify-content: center;
+        align-content: center;
+        border: 1px solid black;
+        margin: 5px;
+        text-align: center;
 
-        &:hover {
-            background: #00BC00;
-            cursor: pointer;
+        &.kk-is-movable {
+            background: #008000;
+
+            &:hover {
+                background: #00BC00;
+                cursor: pointer;
+            }
         }
-    }
 
-    &.kk-is-reserved {
-        background: blue;
+        &.kk-is-reserved {
+            background: blue;
+        }
     }
 }

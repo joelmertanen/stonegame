@@ -35,7 +35,7 @@ angular.module('kivipeli')
                 service.gameResult = 'lost';
             } else {
                 // string params are always difficult. hopefully this helps in catching them:
-                throw "Unidentified player name: " + whichPlayerMoved;
+                throw 'Unidentified player name: ' + whichPlayerMoved;
             }
 
         }

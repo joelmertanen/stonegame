@@ -29,8 +29,10 @@ angular.module('kivipeli')
                 row: row,
                 column: column
             }, 'human')) {
-            service.isHumanTurn = false;
-            aiMoveButton();
+            if (!gameService.gameResult) {
+                service.isHumanTurn = false;
+                aiMoveButton();
+            }
         }
     }
 

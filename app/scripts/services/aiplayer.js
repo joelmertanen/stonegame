@@ -30,31 +30,33 @@ angular.module('kivipeli')
     }
 
     function makeMove(currentLocation) {
+      // no options, move up:
       if (currentLocation.row === 0) {
         return {
           row: 0,
           column: currentLocation.column - 1
-        }
+        };
       }
 
+      // no options, move left:
       if (currentLocation.column === 0) {
         return {
           row: currentLocation.row - 1,
           column: 0
-        }
+        };
       }
 
       if (Math.random() < 0.5) {
         return {
           row: currentLocation.row - 1,
           column: currentLocation.column
-        }
+        };
       }
 
       return {
         row: currentLocation.row,
         column: currentLocation.column - 1
-      }
+      };
 
     }
 
