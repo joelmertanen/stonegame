@@ -3,6 +3,10 @@
     flex: 1 1 auto;
     height: 60px; // not happy about this :(
 
+    &.kk-goal-cell .kk-cell {
+        background-color: #EDDE3B;
+    }
+
     .kk-cell {
         display: flex;
         flex: 1 1 auto;
