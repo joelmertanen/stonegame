@@ -18,7 +18,9 @@ angular.module('kivipeli')
         fieldSize: fieldSize,
         gameResult: gameResult,
         newGame: newGame,
-        moveButtonTo: moveButtonTo
+        moveButtonDiagonal: moveButtonDiagonal,
+        moveButtonUp: moveButtonUp,
+        moveButtonLeft: moveButtonLeft
     };
 
     newGame();
@@ -51,12 +53,15 @@ angular.module('kivipeli')
         service.gameResult = undefined;
     }
 
-    function moveButtonTo(moveObject, whichPlayer) {
-        // validate input, it might come from DOM as a string
-        var parsedRow       = window.parseInt(moveObject.row);
-        var parsedColumn    = window.parseInt(moveObject.column);
-        // validate first:
-        if (parsedRow < 0 || parsedColumn < 0) {
+    function moveButtonTo(newLocation) {
+        angular.extend(currentLocation, {
+            row: newLocation.row,
+            column: newLocation.column
+        });
+    }
+
+    function isMoveValid(newLocation) {
+        if (newLocation.row < 0 || newLocation.column < 0) {
             return false;
         }
 
@@ -67,19 +72,55 @@ angular.module('kivipeli')
         }
 
         // only one move to left up or make a diagonal move
-        var oneUpOrLeft = (currentLocation.row - parsedRow) + (currentLocation.column - parsedColumn) === 1;
-        var oneDiagonal = parsedRow === currentLocation.row - 1 && parsedColumn === currentLocation.column - 1;
+        var oneUpOrLeft = (currentLocation.row - newLocation.row) + (currentLocation.column - newLocation.column) === 1;
+        var oneDiagonal = newLocation.row === currentLocation.row - 1 && newLocation.column === currentLocation.column - 1;
         if (!oneUpOrLeft && !oneDiagonal) {
             return false;
         }
 
-        angular.extend(currentLocation, {
-            row: parsedRow,
-            column: parsedColumn
-        });
-
-        updateGameStatus(whichPlayer);
-
         return true;
     }
+
+    function moveButtonDiagonal(whichPlayerMoved) {
+        var newLocation = {
+            row:    currentLocation.row - 1,
+            column: currentLocation.column - 1
+        };
+        if (!isMoveValid(newLocation)) {
+            return false;
+        }
+
+        moveButtonTo(newLocation);
+        updateGameStatus(whichPlayerMoved);
+        return true;
+    }
+
+    function moveButtonLeft(whichPlayerMoved) {
+        var newLocation = {
+            row:    currentLocation.row,
+            column: currentLocation.column - 1
+        };
+        if (!isMoveValid(newLocation)) {
+            return false;
+        }
+
+        moveButtonTo(newLocation);
+        updateGameStatus(whichPlayerMoved);
+        return true;
+    }
+
+    function moveButtonUp(whichPlayerMoved) {
+        var newLocation = {
+            row:    currentLocation.row - 1,
+            column: currentLocation.column
+        };
+        if (!isMoveValid(newLocation)) {
+            return false;
+        }
+
+        moveButtonTo(newLocation);
+        updateGameStatus(whichPlayerMoved);
+        return true;
+    }
+
   });

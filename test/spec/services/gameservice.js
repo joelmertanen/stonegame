@@ -20,7 +20,7 @@ describe('Service: gameService', function () {
     });
   });
 
-  describe('moveButtonTo', function() {
+  describe('move button', function() {
     var oldLocation;
     var oldRow;
     var oldColumn;
@@ -31,12 +31,12 @@ describe('Service: gameService', function () {
       oldColumn   = oldLocation.column;
     });
 
-    it('should update location with ints', function() {
+    it('should move left', function() {
       var nextLocation = {
-        row: oldRow - 1,
-        column: oldColumn
+        row: oldRow,
+        column: oldColumn - 1
       };
-      var wasMoveAllowed = gameService.moveButtonTo(nextLocation);
+      var wasMoveAllowed = gameService.moveButtonLeft('human');
       var newLocation = gameService.currentLocation;
 
       expect(wasMoveAllowed).toBe(true);
@@ -44,16 +44,12 @@ describe('Service: gameService', function () {
       expect(newLocation.column).toBe(nextLocation.column);
     });
 
-    it('should update location with strings', function() {
+    it('should move up', function() {
       var nextLocation = {
         row: oldRow - 1,
         column: oldColumn
       };
-
-      var wasMoveAllowed = gameService.moveButtonTo({
-        row: nextLocation.row + '',
-        column: nextLocation.column + ''
-      });
+      var wasMoveAllowed = gameService.moveButtonUp('human');
       var newLocation = gameService.currentLocation;
 
       expect(wasMoveAllowed).toBe(true);
@@ -61,13 +57,12 @@ describe('Service: gameService', function () {
       expect(newLocation.column).toBe(nextLocation.column);
     });
 
-    it('should allow diagonal moves', function() {
+    it('should move diagonal', function() {
       var nextLocation = {
         row: oldRow - 1,
         column: oldColumn - 1
       };
-
-      var wasMoveAllowed = gameService.moveButtonTo(nextLocation);
+      var wasMoveAllowed = gameService.moveButtonDiagonal('human');
       var newLocation = gameService.currentLocation;
 
       expect(wasMoveAllowed).toBe(true);
@@ -75,40 +70,22 @@ describe('Service: gameService', function () {
       expect(newLocation.column).toBe(nextLocation.column);
     });
 
-    it('should validate input and not change location on if over one cell of movement', function() {
-      var nextLocation = {
-        row: oldRow - 2, // illegal
-        column: oldColumn
-      };
-      var wasMoveAllowed  = gameService.moveButtonTo(nextLocation);
-      var newLocation     = gameService.currentLocation;
-
-      expect(wasMoveAllowed).toBe(false);
-      expect(newLocation.row).toBe(oldRow);
-      expect(newLocation.column).toBe(oldColumn);
-    });
-
     it('should validate input and not change location to under zero', function() {
       function moveToLeftmostCell() {
-        var loc = gameService.currentLocation;
-        if (loc.column === 0) {
+        if (!gameService.moveButtonLeft()) {
           return;
         }
-        gameService.moveButtonTo({
-          row: loc.row,
-          column: loc.column - 1
-        });
         moveToLeftmostCell();
       }
 
       moveToLeftmostCell();
 
       var nextLocation = {
-        row:    oldRow,
-        column: -1
+        row:    oldRow - 1,
+        column: - 1
       };
 
-      var wasMoveAllowed  = gameService.moveButtonTo(nextLocation);
+      var wasMoveAllowed  = gameService.moveButtonDiagonal('human');
       var newLocation     = gameService.currentLocation;
 
       expect(wasMoveAllowed).toBe(false);

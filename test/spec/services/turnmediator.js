@@ -8,7 +8,7 @@ describe('Service: turnMediatorService', function () {
 
   beforeEach(function () {
     mockDependency = {
-        moveButtonTo: function () {
+        moveButtonDiagonal: function () {
             return true;
         }
     };
@@ -28,7 +28,7 @@ describe('Service: turnMediatorService', function () {
 
     it('should change the state of the isHumanTurn', function() {
         expect(turnMediatorService.isHumanTurn).toBe(true);
-        turnMediatorService.humanMoveButtonTo(0, 0);
+        turnMediatorService.moveButtonDiagonal('human');
         expect(turnMediatorService.isHumanTurn).toBe(false);
     });
 

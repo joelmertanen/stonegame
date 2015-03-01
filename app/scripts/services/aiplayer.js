@@ -31,33 +31,26 @@ angular.module('kivipeli')
 
     function makeMove(currentLocation) {
       // no options, move up:
-      if (currentLocation.row === 0) {
-        return {
-          row: 0,
-          column: currentLocation.column - 1
-        };
+      if (currentLocation.column === 0) {
+        return 'up';
       }
 
       // no options, move left:
-      if (currentLocation.column === 0) {
-        return {
-          row: currentLocation.row - 1,
-          column: 0
-        };
+      if (currentLocation.row === 0) {
+        return 'left';
       }
 
-      if (Math.random() < 0.5) {
-        return {
-          row: currentLocation.row - 1,
-          column: currentLocation.column
-        };
+      var random = Math.random();
+
+      if (random < 0.3) {
+        return 'up';
       }
 
-      return {
-        row: currentLocation.row,
-        column: currentLocation.column - 1
-      };
+      if (random < 0.6) {
+        return 'diagonal';
+      }
 
+      return 'left';
     }
 
   });

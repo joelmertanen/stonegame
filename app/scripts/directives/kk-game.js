@@ -15,7 +15,9 @@ angular.module('kivipeli')
       templateUrl: '/views/kk-game.html',
       restrict: 'E',
       scope: {
-        ctrlMoveButtonTo: '&moveButtonTo',
+        ctrlMoveButtonLeft: '&moveButtonLeft',
+        ctrlMoveButtonUp: '&moveButtonUp',
+        ctrlMoveButtonDiagonal: '&moveButtonDiagonal',
         currentLocation: '=',
         fieldSize: '=',
         isHumanTurn: '='
@@ -34,6 +36,26 @@ angular.module('kivipeli')
                 return [];
             }
             return _.range($scope.fieldSize);
+        }
+
+        function moveButtonTo(row, column) {
+            var parsedRow       = window.parseInt(row, 10);
+            var parsedColumn    = window.parseInt(column, 10);
+            var isToLeft    =   parsedRow === $scope.currentLocation.row     && parsedColumn === $scope.currentLocation.column - 1;
+            var isToUp      =   parsedRow === $scope.currentLocation.row - 1 && parsedColumn === $scope.currentLocation.column;
+            var isDiagonal  =   parsedRow === $scope.currentLocation.row - 1 && parsedColumn === $scope.currentLocation.column - 1;
+
+            if (isToLeft) {
+                return $scope.ctrlMoveButtonLeft();
+            }
+
+            if (isToUp) {
+                return $scope.ctrlMoveButtonUp();
+            }
+
+            if (isDiagonal) {
+                return $scope.ctrlMoveButtonDiagonal();
+            }
         }
 
         function isMovableCell(row, column) {
@@ -74,12 +96,6 @@ angular.module('kivipeli')
             }
         }
 
-        function moveButtonTo(row, column) {
-            $scope.ctrlMoveButtonTo({
-                row:    row,
-                column: column
-            });
-        }
       }
     };
   });

@@ -4,7 +4,9 @@
 	<kk-game
         field-size="gameService.fieldSize"
         current-location="gameService.currentLocation"
-        move-button-to="turnMediatorService.humanMoveButtonTo(row, column)"
+        move-button-left="turnMediatorService.moveButtonLeft('human')"
+        move-button-up="turnMediatorService.moveButtonUp('human')"
+        move-button-diagonal="turnMediatorService.moveButtonDiagonal('human')"
         is-human-turn="turnMediatorService.isHumanTurn"
     ></kk-game>
 </div>
