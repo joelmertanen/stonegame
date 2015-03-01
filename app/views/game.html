@@ -1,6 +1,6 @@
 <div class="kk-container">
-	<h1 ng-show="gameService.gameIsRunning">The game is on!</h1>
-    <h1 ng-hide="gameService.gameIsRunning">The game has ended!</h1>
+	<h1 ng-hide="gameService.gameResult">The game is on!</h1>
+    <h1 ng-show="gameService.gameResult">The game has ended! You {{gameService.gameResult}} the game!</h1>
 	<kk-game
         field-size="gameService.fieldSize"
         current-location="gameService.currentLocation"

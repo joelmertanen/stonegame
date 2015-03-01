@@ -10,13 +10,13 @@
 angular.module('kivipeli')
   .factory('gameService', function() {
     var fieldSize = 8;
-    var gameIsRunning = true;
+    var gameResult;
 
     var currentLocation = {};
     var service = {
         currentLocation: currentLocation,
         fieldSize: fieldSize,
-        gameIsRunning: gameIsRunning,
+        gameResult: gameResult,
         newGame: newGame,
         moveButtonTo: moveButtonTo
     };
@@ -25,10 +25,19 @@ angular.module('kivipeli')
 
     return service;
 
-    function updateGameStatus() {
+    function updateGameStatus(whichPlayerMoved) {
+        // if game ended
         if (currentLocation.row === 0 && currentLocation.column === 0) {
             // don't break the reference... this is annoying.
-            service.gameIsRunning = false;
+            if (whichPlayerMoved === 'ai') {
+                service.gameResult = 'won';
+            } else if (whichPlayerMoved === 'human') {
+                service.gameResult = 'lost';
+            } else {
+                // string params are always difficult. hopefully this helps in catching them:
+                throw "Unidentified player name: " + whichPlayerMoved;
+            }
+
         }
     }
 
@@ -39,26 +48,28 @@ angular.module('kivipeli')
             row:    fieldSize - 1,
             column: fieldSize - 1
         });
-        gameIsRunning = true;
+        service.gameResult = undefined;
     }
 
-    function moveButtonTo(row, column) {
-        if (row < 0 || column < 0) {
+    function moveButtonTo(moveObject, whichPlayer) {
+        // validate input, it might come from DOM as a string
+        var parsedRow       = window.parseInt(moveObject.row);
+        var parsedColumn    = window.parseInt(moveObject.column);
+        // validate first:
+        if (parsedRow < 0 || parsedColumn < 0) {
             return false;
         }
 
-        var parsedRow       = window.parseInt(row);
-        var parsedColumn    = window.parseInt(column);
-        // validate first:
         // if game has ended
         var isGameEnded = currentLocation.row === 0 && currentLocation.column === 0;
         if (isGameEnded) {
             return false;
         }
 
-        // only one move to left or up, checks also direction
-        var sum = (currentLocation.row - parsedRow) + (currentLocation.column - parsedColumn);
-        if (sum !== 1) {
+        // only one move to left up or make a diagonal move
+        var oneUpOrLeft = (currentLocation.row - parsedRow) + (currentLocation.column - parsedColumn) === 1;
+        var oneDiagonal = parsedRow === currentLocation.row - 1 && parsedColumn === currentLocation.column - 1;
+        if (!oneUpOrLeft && !oneDiagonal) {
             return false;
         }
 
@@ -67,7 +78,7 @@ angular.module('kivipeli')
             column: parsedColumn
         });
 
-        updateGameStatus();
+        updateGameStatus(whichPlayer);
 
         return true;
     }

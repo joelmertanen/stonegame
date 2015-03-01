@@ -25,19 +25,23 @@ angular.module('kivipeli')
             return;
         }
 
-        if (gameService.moveButtonTo(row, column)) {
+        if (gameService.moveButtonTo({
+                row: row,
+                column: column
+            }, 'human')) {
             service.isHumanTurn = false;
             aiMoveButton();
         }
     }
 
     function aiMoveButton() {
-        var s = aiPlayer.makeMove(gameService.currentLocation)
-        s.then(function(aiPlayerMove) {
-            if (gameService.moveButtonTo(aiPlayerMove.row, aiPlayerMove.column)) {
+        // async to simulate hardcore AI calculations ;)
+        aiPlayer.makeMove(gameService.currentLocation)
+          .then(function(aiPlayerMove) {
+            if (gameService.moveButtonTo(aiPlayerMove, 'ai')) {
                 service.isHumanTurn = true;
             }
-        });
+          });
     }
 
   });

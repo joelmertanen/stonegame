@@ -42,7 +42,8 @@ angular.module('kivipeli')
             }
             var isToLeft    =   row === $scope.currentLocation.row && column === $scope.currentLocation.column - 1;
             var isToUp      =   row === $scope.currentLocation.row - 1 && column === $scope.currentLocation.column;
-            return isToUp || isToLeft;
+            var isDiagonal  =   row === $scope.currentLocation.row - 1 && column === $scope.currentLocation.column - 1;
+            return isToUp || isToLeft || isDiagonal;
         }
 
         function isReservedCell(row, column) {
