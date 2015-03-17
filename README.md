@@ -1,7 +1,7 @@
 # stonegame
 recreated the good old stonegame to test few things for fun
 
-You basically can't win, but don't worry about that. Maybe you can in the next version, when I implement a feature to change the size of the field or something ;)
+You'll start winning when you get the strategy. The game will be more interesting in the future, when I get the time to implement a feature to change the size of the field or something ;)
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
 version 0.11.1.
